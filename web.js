@@ -25,8 +25,13 @@ app.get('/items/:id', (req, res) => {
 	const id = req.params.id;
 	const itemFoundById = items.find(x => x.id == id);
 	var text = "Product name: "+itemFoundById.name+", price: "+itemFoundById.price+".";
-	//res.end(itemFoundById);
 	res.end(text);
+});
+app.patch('/items/:id', (req, res) => {
+	const id = req.params.id;
+	const objIndex = items.findIndex((x => x.id == id));
+	items[objIndex] = {...items[objIndex], ...req.body }
+	res.sendStatus(204);
 });
 
 app.listen(PORT);
