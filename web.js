@@ -31,9 +31,14 @@ app.patch('/items/:id', (req, res) => {
 	const id = req.params.id;
 	const objIndex = items.findIndex((x => x.id == id));
 	items[objIndex] = {...items[objIndex], ...req.body }
-	res.sendStatus(204);
+	res.json(items);
 });
-
+app.delete('/items/:id', (req, res) => {
+	const id = req.params.id;
+	const objIndex = items.findIndex((x => x.id == id));
+	items.splice(objIndex, 1);
+	res.json(items);
+});
 app.listen(PORT);
 
 
